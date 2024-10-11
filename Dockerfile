@@ -28,10 +28,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 # Copy existing application directory contents
-COPY . /var/www
+COPY ./src /var/www
 
 # Install PHP dependencies
-RUN composer install
+# RUN composer install
 
 # Install Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
@@ -39,20 +39,13 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && apt-get update && apt-get install -y yarn
 
 # Install Node.js dependencies
-RUN yarn install
+# RUN yarn install && yarn build
 
-# Copy .env.example to .env
-# RUN cp .env .env
-
-# Generate key
 # RUN php artisan key:generate
-
-# Run migrations
 # RUN php artisan migrate
 
 # Run seeders
 # RUN php artisan db:seed
 
-# Expose port 9000 and start php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+# Expose port 8000 and start php-fpm server
+EXPOSE 8000

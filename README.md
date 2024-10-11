@@ -48,10 +48,16 @@ Setting up your development environment on your local machine:
 edit .env file
 $ docker-compose up -d --build
 $ docker-compose exec -it laravel-blog bash
-$ php artisan key:generate
-$ php artisan db:seed
-$ php artisan serve --host 0.0.0.0
+$ composer install && yarn install && yarn build (to get vendor)
+$ php artisan key:generate (only run first time)
+$ php artisan db:seed (only run first time)
+$ php artisan serve --host 0.0.0.0 (can change command in docker-compose.yaml file by this command)
 
+```
+Grant code folder(for development):
+```bash
+sudo chmod -R a+rw  src
+sudo chmod -R 777 src
 ```
 
 ## Installation
