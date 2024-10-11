@@ -20,3 +20,4 @@ public/build/
 .phpunit.result.cache
 pint.json
 storage/media-library/temp
+/mysql

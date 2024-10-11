@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  # nginx:
+  #   image: nginx:stable
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - ./src:/var/www/html
+  #     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+  laravel-blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # volumes:
+    #   - ./src:/var/www/html
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+  mysql:
+    image: mysql:8.0.29
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment: 
+      MYSQL_DATABASE: laravel_blog
+      MYSQL_USER: laravel_blog
+      MYSQL_PASSWORD: sdf@%DFGDFg345
+      MYSQL_ROOT_PASSWORD: password
+  redis:
+    image: redis:5.0-alpine
+    ports:
+      - 6379:6379
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin:latest
+  #   ports:
+  #     - "8081:80"
+  #   environment:
+  #     - PMA_HOSTS=mysql
+  #     - PMA_PORT=3306
+  #     - PMA_USER=sdf@%DFGDFg345
+  #     - PMA_PASSWORD=sdf@%DFGDFg345

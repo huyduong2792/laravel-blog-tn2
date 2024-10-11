@@ -39,6 +39,21 @@ Beside Laravel, this project uses other tools like:
 
 You can find some screenshots of the application on : [https://imgur.com/a/Jbnwj](https://imgur.com/a/Jbnwj)
 
+## Installation Docker
+
+To create your development environment [follow these instructions](https://laravel.com/docs/10.x/installation).
+
+Setting up your development environment on your local machine:
+```bash
+edit .env file
+$ docker-compose up -d --build
+$ docker-compose exec -it laravel-blog bash
+$ php artisan key:generate
+$ php artisan db:seed
+$ php artisan serve --host 0.0.0.0
+
+```
+
 ## Installation
 
 To create your development environment [follow these instructions](https://laravel.com/docs/10.x/installation).
