@@ -13,6 +13,8 @@ class Role extends Model
 
     const ROLE_EDITOR = 'editor';
 
+    const ROLE_AUTHOR = 'author';
+
     /**
      * The attributes that are mass assignable.
      *

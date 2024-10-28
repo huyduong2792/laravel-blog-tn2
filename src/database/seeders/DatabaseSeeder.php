@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         // Roles
         Role::firstOrCreate(['name' => Role::ROLE_EDITOR]);
+        Role::firstOrCreate(['name' => Role::ROLE_AUTHOR]);
+
         $role_admin = Role::firstOrCreate(['name' => Role::ROLE_ADMIN]);
 
         // MediaLibrary
@@ -24,10 +26,10 @@ class DatabaseSeeder extends Seeder
 
         // Users
         $user = User::firstOrCreate(
-            ['email' => 'darthvader@deathstar.ds'],
+            ['email' => 'duongquanghuy2792000@gmail.com'],
             [
-                'name' => 'anakin',
-                'password' => Hash::make('4nak1n'),
+                'name' => 'huyduong2792000',
+                'password' => Hash::make('123@Abca'),
                 'email_verified_at' => now()
             ]
         );
