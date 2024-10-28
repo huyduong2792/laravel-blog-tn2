@@ -13,6 +13,7 @@ use App\Http\Controllers\NewsletterSubscriptionController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPasswordController;
+use App\Http\Controllers\UserRolesController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/.well-known/change-password', '/settings/password');
@@ -49,6 +50,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('password', [UserPasswordController::class, 'edit'])->name('users.password');
         Route::match(['put', 'patch'], 'password', [UserPasswordController::class, 'update'])->name('users.password.update');
+
+        Route::get('roles', [UserRolesController::class, 'edit'])->name('users.roles');
+        Route::match(['put', 'patch'], 'roles', [UserRolesController::class, 'update'])->name('users.roles.update');
     });
 
     Route::resource('comments', CommentController::class)->only(['store', 'destroy']);

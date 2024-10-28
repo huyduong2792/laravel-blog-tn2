@@ -11,7 +11,11 @@
 
           @lang('users.profile')
         </a>
+        <a href="{{ route('users.roles') }}" @class(['list-group-item', 'active' => $tab == 'roles'])>
+          <x-icon name="briefcase" />
 
+          @lang('users.role')
+        </a>
         <a href="{{ route('users.password') }}" @class(['list-group-item', 'active' => $tab == 'security'])>
           <x-icon name="lock" />
 

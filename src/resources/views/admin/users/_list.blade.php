@@ -5,6 +5,7 @@
             <th>@lang('users.attributes.name')</th>
             <th>@lang('users.attributes.email')</th>
             <th>@lang('users.attributes.registered_at')</th>
+            <th>@lang('users.attributes.roles')</th>
             <th></th>
         </tr>
     </thead>
@@ -18,6 +19,7 @@
                 </td>
                 <td>{{ $user->email }}</td>
                 <td>@humanize_date($user->registered_at, 'd/m/Y H:i:s')</td>
+                <td>{{ $user->roles->pluck('name')->implode(', ') }}</td>
                 <td>
                     <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-primary btn-sm">
                         <x-icon name="edit" />

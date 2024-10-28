@@ -11,6 +11,8 @@ return [
     'new_users' => 'new user|new users',
     'count' => ':count user|:count users',
     'security' => 'Security',
+    'role' => 'Role',
+    'request_to_become' => 'Request to become',
 
     'attributes' => [
         'name' => 'Name',
