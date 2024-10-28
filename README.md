@@ -89,8 +89,8 @@ $ php artisan migrate --seed
 
 This will create a new user that you can use to sign in :
 ```yml
-email: darthvader@deathstar.ds
-password: 4nak1n
+email: duongquanghuy2792000@gmail.com
+password: 123@Abca
 ```
 
 And then, compile the assets :
