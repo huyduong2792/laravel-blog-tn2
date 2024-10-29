@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserPasswordsRequest;
+use App\Http\Requests\RoleRequestRequest;
 use App\Models\Role;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\RoleRequest;
+
 use Illuminate\View\View;
+
 
 class UserRolesController extends Controller
 {
@@ -25,20 +27,23 @@ class UserRolesController extends Controller
     }
 
     /**
-     * Update password for the specified resource in storage.
+     * Create a role request for the specified user.
      */
-    public function update(UserPasswordsRequest $request): RedirectResponse
+    public function requestRole(RoleRequestRequest $request)
     {
         $user = auth()->user();
 
         $this->authorize('update', $user);
 
-        $request->merge([
-            'password' => Hash::make($request->input('password'))
+        $roleName = $request->input('role');
+        $role = Role::where('name', $roleName)->firstOrFail();
+
+        RoleRequest::firstOrCreate([
+            'user_id' => $user->id,
+            'role_id' => $role->id,
+            'status' => 'pending'
         ]);
 
-        $user->update($request->only('password'));
-
-        return redirect()->route('users.password')->withSuccess(__('users.password_updated'));
+        return redirect()->route('users.roles')->withSuccess(__('users.request_submitted'));
     }
 }

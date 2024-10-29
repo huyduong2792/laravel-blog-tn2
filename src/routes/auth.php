@@ -52,7 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::match(['put', 'patch'], 'password', [UserPasswordController::class, 'update'])->name('users.password.update');
 
         Route::get('roles', [UserRolesController::class, 'edit'])->name('users.roles');
-        Route::match(['put', 'patch'], 'roles', [UserRolesController::class, 'update'])->name('users.roles.update');
+        Route::post('roles', [UserRolesController::class, 'requestRole'])->name('users.roles.request');
     });
 
     Route::resource('comments', CommentController::class)->only(['store', 'destroy']);

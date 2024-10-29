@@ -13,6 +13,7 @@ return [
     'security' => 'Security',
     'role' => 'Role',
     'request_to_become' => 'Request to become',
+    'request_submitted' => 'Request submitted',
 
     'attributes' => [
         'name' => 'Name',

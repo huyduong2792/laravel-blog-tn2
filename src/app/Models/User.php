@@ -96,6 +96,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Check if the user has pending role request
+     */
+    public function hasPendingRoleRequest(string $role): bool
+    {
+        return $this->roleRequests()
+                    ->whereHas('role', function ($query) use ($role) {
+                        $query->where('name', $role);
+                    })
+                    ->where('status', RoleRequest::STATUS_PENDING)
+                    ->exists();
+    }
+
+    /**
      * Check if the user has role admin
      */
     public function isAdmin(): bool
@@ -141,5 +154,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles(): belongsToMany
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    /**
+     * Return the user's role requests
+     */
+    public function roleRequests(): HasMany
+    {
+        return $this->hasMany(RoleRequest::class);
     }
 }
