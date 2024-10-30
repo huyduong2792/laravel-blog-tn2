@@ -14,6 +14,9 @@ return [
     'role' => 'Role',
     'request_to_become' => 'Request to become',
     'request_submitted' => 'Request submitted',
+    'action' => 'Action',
+    'requested_at' => 'Requested at',
+    'role_request_updated' => 'Role request updated',
 
     'attributes' => [
         'name' => 'Name',
@@ -23,6 +26,7 @@ return [
         'password_confirmation' => 'Password confirmation',
         'roles' => 'Roles',
         'registered_at' => 'Registered at',
+        'role_requests' => 'Role requests',
     ],
 
     'placeholder' => [
@@ -31,5 +35,20 @@ return [
         'current_password' => 'Your current password',
         'password' => 'Your new password',
         'password_confirmation' => 'Password confirmation'
-    ]
+    ],
+
+    'actions' => [
+        'update' => 'Update',
+        'update_password' => 'Update password',
+        'request' => 'Request',
+        'cancel_request' => 'Cancel request',
+        'approve' => 'Approve',
+        'reject' => 'Reject',
+    ],
+
+    'statuses' => [
+        'pending' => 'Pending',
+        'approved' => 'Approved',
+        'rejected' => 'Rejected',
+    ],
 ];

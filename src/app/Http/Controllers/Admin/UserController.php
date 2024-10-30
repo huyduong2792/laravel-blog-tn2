@@ -38,13 +38,15 @@ class UserController extends Controller
      */
     public function update(UsersRequest $request, User $user): RedirectResponse
     {
-        if ($request->filled('password')) {
-            $request->merge([
-                'password' => Hash::make($request->input('password'))
-            ]);
-        }
+        // if ($request->filled('password')) {
+        //     $request->merge([
+        //         'password' => Hash::make($request->input('password'))
+        //     ]);
+        // }
 
-        $user->update(array_filter($request->only(['name', 'email', 'password'])));
+        // $user->update(array_filter($request->only(['name', 'email', 'password'])));
+        $user->update(array_filter($request->only(['name', 'email'])));
+
 
         $role_ids = array_values($request->get('roles', []));
         $user->roles()->sync($role_ids);

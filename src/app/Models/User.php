@@ -84,7 +84,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function canBeAuthor(): bool
     {
-        return $this->isAdmin() || $this->isEditor();
+        return $this->isAdmin() || $this->isEditor() || $this->isAuthor();
     }
 
     /**
@@ -122,6 +122,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isEditor(): bool
     {
         return $this->hasRole(Role::ROLE_EDITOR);
+    }
+
+    /**
+     * Check if the user has role author
+     */
+    public function isAuthor(): bool
+    {
+        return $this->hasRole(Role::ROLE_AUTHOR);
     }
 
     /**

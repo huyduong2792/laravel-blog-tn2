@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PostThumbnailController;
 use App\Http\Controllers\Admin\ShowDashboard;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleRequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('dashboard', ShowDashboard::class)->name('dashboard');
@@ -14,3 +15,4 @@ Route::delete('/posts/{post}/thumbnail', [PostThumbnailController::class, 'destr
 Route::resource('users', UserController::class)->only(['index', 'edit', 'update']);
 Route::resource('comments', CommentController::class)->only(['index', 'edit', 'update', 'destroy']);
 Route::resource('media', MediaLibraryController::class)->only(['index', 'show', 'create', 'store', 'destroy']);
+Route::match(['put', 'patch'], '/role/request/{roleRequest}', [RoleRequestController::class, 'update'])->name('role_request.update');

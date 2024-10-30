@@ -1,3 +1,4 @@
+
 <form action="{{ route('admin.users.update', $user) }}" method="POST">
   @method('PATCH')
   @csrf
@@ -27,25 +28,24 @@
       <label class="form-label" for="email">
         @lang('users.attributes.email')
       </label>
-
       <input
-          type="email"
-          id="email"
-          name="email"
-          @class(['form-control', 'is-invalid' => $errors->has('email')])
-          placeholder="@lang('users.placeholder.email')"
-          required
-          value="{{ old('email', $user) }}"
+        type="email"
+        id="email"
+        name="email"
+        @class(['form-control', 'bg-secondary', 'is-invalid' => $errors->has('email')])
+        placeholder="@lang('users.placeholder.email')"
+        required
+        value="{{ old('email', $user) }}"
       >
-
+      
       @error('email')
-        <span class="invalid-feedback">{{ $message }}</span>
+      <span class="invalid-feedback">{{ $message }}</span>
       @enderror
     </div>
   </div>
-
+  
   <div class="row">
-    <div class="form-group mb-3 col-md-6">
+    {{-- <div class="form-group mb-3 col-md-6">
       <label class="form-label" for="password">
         @lang('users.attributes.password')
       </label>
@@ -61,9 +61,9 @@
       @error('password')
         <span class="invalid-feedback">{{ $message }}</span>
       @enderror
-    </div>
+    </div> --}}
 
-    <div class="form-group mb-3 col-md-6">
+    {{-- <div class="form-group mb-3 col-md-6">
       <label class="form-label" for="password_confirmation">
         @lang('users.attributes.password_confirmation')
       </label>
@@ -79,7 +79,7 @@
       @error('password_confirmation')
         <span class="invalid-feedback">{{ $message }}</span>
       @enderror
-    </div>
+    </div> --}}
   </div>
 
   <div class="form-group mb-3">
@@ -102,11 +102,6 @@
     @endforeach
   </div>
 
-  <a href="{{ route('admin.users.index') }}" class="btn btn-light">
-      <x-icon name="chevron-left" />
-
-      @lang('forms.actions.back')
-  </a>
 
   <button type="submit" class="btn btn-primary">
       <x-icon name="save" />
@@ -114,3 +109,44 @@
       @lang('forms.actions.update')
   </button>
 </form>
+<hr class="my-4">
+<h4>
+  @lang('users.attributes.role_requests')
+</h4>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>@lang('users.request_to_become')</th>
+        <th>@lang('users.requested_at')</th>
+        <th>@lang('users.action')</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      @foreach($user->roleRequests()->orderBy('created_at', 'desc')->take(10)->get() as $roleRequest)
+        <tr>
+          <td>{{ ucfirst($roleRequest->role->name) }}</td>
+          <td>@humanize_date($roleRequest->created_at, 'd/m/Y H:i:s')</td>
+          @if ($roleRequest->status === 'pending')
+            <td>
+              <form action="{{ route('admin.role_request.update', $roleRequest) }}" method="POST">
+                @csrf
+                @method('PATCH')
+
+                <button type="submit" name="action" value="approve" class="btn btn-success">@lang('users.actions.approve')</button>
+                <button type="submit" name="action" value="reject" class="btn btn-danger">@lang('users.actions.reject')</button>
+              </form>
+            </td>
+          @else
+            <td>
+              <span class="{{ $roleRequest->status === 'approved' ? 'text-success' : 'text-danger' }}">
+                @lang("users.statuses.{$roleRequest->status}")
+              </span>
+            </td>
+          @endif
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
