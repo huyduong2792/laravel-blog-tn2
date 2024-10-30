@@ -130,6 +130,14 @@ class Post extends Model
     }
 
     /**
+     * Return the post's category
+     */
+    public function category(): BelongsTo
+    {
+        return $this->BelongsTo(Category::class);
+    }
+
+    /**
      * return the excerpt of the post content
      */
     public function excerpt(int $length = 50): string
