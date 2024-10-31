@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();;
+            $table->string('name')->unique();
+            $table->integer('author_id')->unsigned()->default(0);
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

@@ -13,6 +13,13 @@
         </a>
     </li>
 
+    <li class="nav-item" role="presentation" data-bs-toggle="tooltip" data-bs-placement="right" title="@lang('dashboard.posts')">
+        <a @class(['nav-link', 'active' => request()->route()->named('admin.categories.*')]) href="{{ route('admin.categories.index') }}">
+            <x-icon name="music" prefix="fa-regular"/>
+            <span class="nav-link-text">@lang('dashboard.categories')</span>
+        </a>
+    </li>
+
     <li class="nav-item" role="presentation" data-bs-toggle="tooltip" data-bs-placement="right" title="@lang('dashboard.comments')">
         <a @class(['nav-link', 'active' => request()->route()->named('admin.comments.*')]) href="{{ route('admin.comments.index') }}">
             <x-icon name="comments" prefix="fa-regular" />
