@@ -76,10 +76,15 @@ class Post extends Model
     public function scopeSearch(Builder $query, ?string $search)
     {
         if ($search) {
-            return $query->where('title', 'ILIKE', "%{$search}%");
+            return $query->where('title', 'LIKE', "%{$search}%")
+                ->orWhere('content', 'LIKE', "%{$search}%")
+                ->orWhereHas('author', function ($q) use ($search) {
+                    $q->where('name', 'LIKE', "%{$search}%");
+                });
         }
-    }
 
+        return $query;
+    }
     /**
      * Scope a query to order posts by latest posted
      */
