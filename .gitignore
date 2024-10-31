@@ -21,3 +21,4 @@
 pint.json
 storage/media-library/temp
 /mysql
+/redis

@@ -32,6 +32,9 @@ services:
       MYSQL_ROOT_PASSWORD: password
   redis:
     image: redis:5.0-alpine
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     ports:
       - 6379:6379
   # phpmyadmin:
