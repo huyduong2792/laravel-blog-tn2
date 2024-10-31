@@ -32,7 +32,7 @@
         type="email"
         id="email"
         name="email"
-        @class(['form-control', 'bg-secondary', 'is-invalid' => $errors->has('email')])
+        @class(['form-control', 'bg-secondary-subtle', 'is-invalid' => $errors->has('email')])
         placeholder="@lang('users.placeholder.email')"
         required
         value="{{ old('email', $user) }}"

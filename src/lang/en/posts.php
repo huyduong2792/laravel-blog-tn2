@@ -17,6 +17,9 @@ return [
     'show' => 'Show post',
     'search' => 'Search ...',
     'search_results' => ':count post found|:count posts found',
+    'category' => 'Category',
+    'published' => 'Published',
+    'draft' => 'Draft',
 
     'attributes' => [
         'title' => 'Title',
@@ -25,6 +28,8 @@ return [
         'thumbnail' => 'Post picture',
         'posted_at' => 'Posted at',
         'thumbnail' => 'Thumbnail image',
+        'category' => 'Category',
+        'status' => 'Status',
     ],
 
     'placeholder' => [

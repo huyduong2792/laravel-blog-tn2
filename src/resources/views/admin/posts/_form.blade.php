@@ -60,6 +60,26 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="form-group mb-3 col-md-6">
+        <label class="form-label" for="category_id">
+            @lang('posts.attributes.category')
+        </label>
+
+        <select name="category_id" id="category_id" @class(['form-control', 'is-invalid' => $errors->has('category_id')])>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}" @selected(old('category_id', $post ?? null) == $category->id)>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+
+        @error('author_id')
+            <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
+    </div>
+</div>
+
 <div class="form-group mb-3">
     <label class="form-label" for="thumbnail_id">
         @lang('posts.attributes.thumbnail')
