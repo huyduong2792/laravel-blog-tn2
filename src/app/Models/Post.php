@@ -27,6 +27,7 @@ class Post extends Model
         'content',
         'posted_at',
         'slug',
+        'status',
         'thumbnail_id',
         'category_id'
     ];

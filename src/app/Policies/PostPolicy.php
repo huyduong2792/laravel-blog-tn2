@@ -25,7 +25,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->isEditor() || $user->isAuthor();
     }
 
     /**
@@ -33,7 +33,7 @@ class PostPolicy
      */
     public function store(User $user): bool
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->isEditor() || $user->isAuthor();
     }
 
     /**
@@ -41,6 +41,20 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return $user->isAdmin();
+        if ($post->status !== 'deleted') {
+            return $user->isAdmin() || $user->isEditor();
+        }
+        return true;
+    }
+
+    /**
+     * Determine whether the user can publish the post.
+     */
+    public function publish(User $user, Post $post): bool
+    {
+        if ($post->status !== 'published') {
+            return $user->isAdmin() || $user->isEditor();
+        }
+        return true;
     }
 }

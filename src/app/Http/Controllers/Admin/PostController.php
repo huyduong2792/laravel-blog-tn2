@@ -8,9 +8,11 @@ use App\Models\MediaLibrary;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -64,6 +66,22 @@ class PostController extends Controller
      */
     public function update(PostsRequest $request, Post $post): RedirectResponse
     {
+        if ($request->status === 'published') {
+            $this->authorize('publish',  $post);
+        }
+        if ($request->status === 'deleted') {
+            $this->authorize('delete',  $post);
+            $post->delete();
+            return redirect()->route('admin.posts.index')->withSuccess(__('posts.deleted'));
+        }
+        $user = Auth::user();
+        $status = $request->status;
+        if ($user->hasRole(Role::ROLE_AUTHOR) && $post->status === 'published') {
+            if ($post->title != $request->title || $post->content != $request->content) {
+                $status = 'review';
+            }
+        }
+        $post->update(['status' => $status]);
         $post->update($request->only(['title', 'content', 'posted_at', 'author_id', 'thumbnail_id', 'category_id']));
 
         return redirect()->route('admin.posts.edit', $post)->withSuccess(__('posts.updated'));

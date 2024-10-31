@@ -32,9 +32,11 @@
                 </td>
                 <td>
                     @if($post->status === 'published')
-                        <span class="badge rounded-pill bg-success">@lang('posts.published')</span>
+                        <span class="badge rounded-pill bg-success">@lang('posts.statuses.published')</span>
+                    @elseif($post->status === 'rejected')
+                        <span class="badge rounded-pill bg-danger">@lang('posts.statuses.rejected')</span>
                     @else
-                        <span class="badge rounded-pill bg-warning">@lang('posts.draft')</span>
+                        <span class="badge rounded-pill bg-warning">@lang('posts.statuses.'. $post->status)</span>
                     @endif
                 </td>
                 <td>@humanize_date($post->posted_at, 'd/m/Y H:i:s')</td>

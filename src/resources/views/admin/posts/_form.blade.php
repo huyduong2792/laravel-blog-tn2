@@ -78,6 +78,34 @@
             <span class="invalid-feedback">{{ $message }}</span>
         @enderror
     </div>
+
+    <div class="form-group mb-3 col-md-6">
+        <label class="form-label" for="status">
+            @lang('posts.attributes.status')
+        </label>
+
+        <select name="status" id="status" @class(['form-control', 'is-invalid' => $errors->has('status')])>
+                <option value="draft" @selected(old('status', $post ?? null) == 'draft') >
+                    Draft
+                </option>
+                <option value="review" @selected(old('status', $post ?? null) == 'review')>
+                    Review
+                </option>
+                <option value="rejected" @selected(old('status', $post ?? null) == 'rejected')>
+                    Reject (Only Admin, Editor)
+                </option>
+                <option value="published" @selected(old('status', $post ?? null) == 'published')>
+                    Publish (Only Admin, Editor)
+                </option>
+                <option value="deleted" @selected(old('status', $post ?? null) == 'deleted')>
+                    Delete (Only Admin, Editor)
+                </option>
+        </select>
+
+        @error('author_id')
+            <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
+    </div>
 </div>
 
 <div class="form-group mb-3">

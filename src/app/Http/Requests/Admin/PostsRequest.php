@@ -43,7 +43,8 @@ class PostsRequest extends FormRequest
             'thumbnail_id' => 'nullable|exists:media,id',
             'author_id' => ['required', 'exists:users,id', new CanBeAuthor],
             'slug' => 'unique:posts,slug,' . (optional($this->post)->id ?: 'NULL'),
-            'category_id' => 'exists:categories,id'
+            'category_id' => 'exists:categories,id',
+            'status' => 'required|in:draft,rejected,review,published,deleted'
         ];
     }
 }

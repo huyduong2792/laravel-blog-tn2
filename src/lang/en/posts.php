@@ -36,5 +36,12 @@ return [
         'title' => 'Your title',
         'content' => 'Your content',
         'thumbnail' => 'Choose a thumbnail'
+    ],
+    'statuses' => [
+        'draft' => 'Draft',
+        'published' => 'Published',
+        'deleted' => 'Deleted',
+        'review' => 'Review',
+        'rejected' => 'Rejected'
     ]
 ];
