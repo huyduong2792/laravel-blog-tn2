@@ -19,7 +19,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            @admin
+            @can_access_dashboard
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="{{ route('admin.dashboard') }}" class="nav-link">
@@ -27,7 +27,7 @@
                         </a>
                     </li>
                 </ul>
-            @endadmin
+            @endcan_access_dashboard
 
             <ul class="navbar-nav ms-auto">
                 @guest

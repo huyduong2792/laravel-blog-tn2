@@ -16,16 +16,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Roles
-        Role::firstOrCreate(['name' => Role::ROLE_EDITOR]);
-        Role::firstOrCreate(['name' => Role::ROLE_AUTHOR]);
-
+        $role_editor = Role::firstOrCreate(['name' => Role::ROLE_EDITOR]);
+        $role_author = Role::firstOrCreate(['name' => Role::ROLE_AUTHOR]);
         $role_admin = Role::firstOrCreate(['name' => Role::ROLE_ADMIN]);
 
         // MediaLibrary
         MediaLibrary::firstOrCreate([]);
 
         // Users
-        $user = User::firstOrCreate(
+        $user_admin = User::firstOrCreate(
             ['email' => 'duongquanghuy2792000@gmail.com'],
             [
                 'name' => 'huyduong2792000',
@@ -33,14 +32,33 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now()
             ]
         );
+        $user_admin->roles()->sync([$role_admin->id]);
 
-        $user->roles()->sync([$role_admin->id]);
+        $user_editor = User::firstOrCreate(
+            ['email' => 'editor@gmail.com'],
+            [
+                'name' => 'editor',
+                'password' => Hash::make('123@Abca'),
+                'email_verified_at' => now()
+            ]
+        );
+        $user_editor->roles()->sync([$role_editor->id]);
+
+        $user_author = User::firstOrCreate(
+            ['email' => 'author@gmail.com'],
+            [
+                'name' => 'author',
+                'password' => Hash::make('123@Abca'),
+                'email_verified_at' => now()
+            ]
+        );
+        $user_author->roles()->sync([$role_author->id]);
 
         // Posts
         $post = Post::firstOrCreate(
             [
                 'title' => 'Hello World',
-                'author_id' => $user->id
+                'author_id' => $user_admin->id
             ],
             [
                 'posted_at' => now(),
@@ -55,7 +73,7 @@ class DatabaseSeeder extends Seeder
         // Comments
         Comment::firstOrCreate(
             [
-                'author_id' => $user->id,
+                'author_id' => $user_admin->id,
                 'post_id' => $post->id
             ],
             [
